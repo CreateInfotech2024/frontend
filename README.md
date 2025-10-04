@@ -1,4 +1,24 @@
-# Beauty LMS React Frontend
+# Beauty LMS Frontend
+
+This repository contains two frontends for the Beauty LMS video conferencing system:
+
+1. **React TypeScript Frontend** (in `src/` directory) - Original web-based implementation
+2. **Flutter Frontend** (in `flutter_app/` directory) - Cross-platform mobile and web application
+
+## 🎯 Flutter App (Recommended)
+
+The Flutter application provides the same functionality as the React frontend but with cross-platform support for Android, iOS, and Web.
+
+### Quick Start - Flutter
+```bash
+cd flutter_app
+flutter pub get
+flutter run
+```
+
+See [flutter_app/README.md](flutter_app/README.md) for detailed Flutter setup and usage instructions.
+
+## 📱 React Frontend
 
 A React TypeScript frontend for testing the Beauty LMS video conferencing system, including meeting management, real-time chat, and participant features.
 
