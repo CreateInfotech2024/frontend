@@ -115,11 +115,98 @@ class SocketService {
     });
   }
 
+  // WebRTC Signaling - Send offer
+  void sendOffer(Map<String, dynamic> offer, String to) {
+    if (_socket != null) {
+      _socket!.emit('webrtc-offer', {
+        'offer': offer,
+        'to': to,
+      });
+    }
+  }
+
+  // WebRTC Signaling - Send answer
+  void sendAnswer(Map<String, dynamic> answer, String to) {
+    if (_socket != null) {
+      _socket!.emit('webrtc-answer', {
+        'answer': answer,
+        'to': to,
+      });
+    }
+  }
+
+  // WebRTC Signaling - Send ICE candidate
+  void sendIceCandidate(Map<String, dynamic> candidate, String to) {
+    if (_socket != null) {
+      _socket!.emit('webrtc-ice-candidate', {
+        'candidate': candidate,
+        'to': to,
+      });
+    }
+  }
+
+  // WebRTC Signaling - Listen for offers
+  void onOffer(Function(Map<String, dynamic>) callback) {
+    _socket?.on('webrtc-offer', (data) {
+      callback(data);
+    });
+  }
+
+  // WebRTC Signaling - Listen for answers
+  void onAnswer(Function(Map<String, dynamic>) callback) {
+    _socket?.on('webrtc-answer', (data) {
+      callback(data);
+    });
+  }
+
+  // WebRTC Signaling - Listen for ICE candidates
+  void onIceCandidate(Function(Map<String, dynamic>) callback) {
+    _socket?.on('webrtc-ice-candidate', (data) {
+      callback(data);
+    });
+  }
+
+  // Audio/Video toggle notifications
+  void toggleAudio(bool enabled) {
+    if (_socket != null) {
+      _socket!.emit('participant-audio-toggle', {
+        'audioEnabled': enabled,
+        'timestamp': DateTime.now().toIso8601String(),
+      });
+    }
+  }
+
+  void toggleVideo(bool enabled) {
+    if (_socket != null) {
+      _socket!.emit('participant-video-toggle', {
+        'videoEnabled': enabled,
+        'timestamp': DateTime.now().toIso8601String(),
+      });
+    }
+  }
+
+  void onParticipantAudioToggle(Function(Map<String, dynamic>) callback) {
+    _socket?.on('participant-audio-toggle', (data) {
+      callback(data);
+    });
+  }
+
+  void onParticipantVideoToggle(Function(Map<String, dynamic>) callback) {
+    _socket?.on('participant-video-toggle', (data) {
+      callback(data);
+    });
+  }
+
   // Remove all listeners
   void removeAllListeners() {
     _socket?.off('chat-message');
     _socket?.off('participant-joined');
     _socket?.off('participant-left');
     _socket?.off('meeting-ended');
+    _socket?.off('webrtc-offer');
+    _socket?.off('webrtc-answer');
+    _socket?.off('webrtc-ice-candidate');
+    _socket?.off('participant-audio-toggle');
+    _socket?.off('participant-video-toggle');
   }
 }
