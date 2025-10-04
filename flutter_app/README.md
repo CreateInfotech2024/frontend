@@ -14,10 +14,13 @@ A Flutter application for the Beauty LMS Video Conferencing System, providing cr
 - **Cross-platform**: Runs on Android, iOS, and Web
 
 ### 🎥 Video Conferencing Components
-- Meeting room interface with video placeholder
+- **WebRTC Video/Audio**: Real-time camera and microphone streaming
+- **Multi-participant Support**: View multiple participants in grid layout
+- **Media Controls**: Working mute/unmute and camera on/off toggles
+- Meeting room interface with live video feeds
 - Participant list with real-time updates
 - Chat panel with system messages
-- Meeting controls (mute, camera, screen share placeholders)
+- Meeting controls (mute, camera, screen share buttons)
 
 ## 📱 Platform Support
 
@@ -68,6 +71,7 @@ flutter build web --release
 
 - **http**: REST API client
 - **socket_io_client**: Real-time Socket.IO communication
+- **flutter_webrtc**: WebRTC implementation for video/audio streaming
 - **provider**: State management
 - **intl**: Date and time formatting
 
@@ -82,7 +86,8 @@ lib/
 │   └── chat_message.dart
 ├── services/              # Business logic
 │   ├── api_service.dart
-│   └── socket_service.dart
+│   ├── socket_service.dart
+│   └── webrtc_service.dart  # NEW: WebRTC video/audio streaming
 ├── screens/               # Full-screen pages
 │   ├── home_screen.dart
 │   ├── meeting_room_screen.dart
@@ -118,12 +123,22 @@ Client → Server:
   - join-meeting
   - leave-meeting
   - chat-message
+  - webrtc-offer              # NEW: WebRTC signaling
+  - webrtc-answer             # NEW: WebRTC signaling
+  - webrtc-ice-candidate      # NEW: WebRTC signaling
+  - participant-audio-toggle  # NEW: Audio state updates
+  - participant-video-toggle  # NEW: Video state updates
 
 Server → Client:
   - chat-message
   - participant-joined
   - participant-left
   - meeting-ended
+  - webrtc-offer              # NEW: WebRTC signaling
+  - webrtc-answer             # NEW: WebRTC signaling
+  - webrtc-ice-candidate      # NEW: WebRTC signaling
+  - participant-audio-toggle  # NEW: Audio state updates
+  - participant-video-toggle  # NEW: Video state updates
 ```
 
 ## 🎯 Usage Guide
@@ -178,13 +193,13 @@ flutter format .
 
 ## 🚀 Future Enhancements
 
-- **WebRTC Integration**: Real video/audio streaming
 - **Screen Sharing**: Desktop sharing capabilities
 - **Recording**: Meeting recording and playback
 - **File Sharing**: Document and media sharing
 - **User Authentication**: Login and user management
 - **Push Notifications**: Meeting reminders and notifications
 - **Offline Support**: Local data caching
+- **Better Video Quality**: Adaptive bitrate and quality controls
 
 ## 📞 Support
 
