@@ -18,11 +18,17 @@ flutter run
 
 See [flutter_app/README.md](flutter_app/README.md) for detailed Flutter setup and usage instructions.
 
-## 📱 React Frontend
+## 📱 React Frontend (Legacy)
 
 A React TypeScript frontend for testing the Beauty LMS video conferencing system, including meeting management, real-time chat, and participant features.
 
-## 🚀 Features
+### Quick Start - React
+```bash
+npm install
+npm start
+```
+
+## 🚀 React Features
 
 ### ✅ Implemented Features
 - **Meeting Creation**: Create new video meeting rooms with custom titles and descriptions
